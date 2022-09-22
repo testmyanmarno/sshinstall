@@ -1,0 +1,17 @@
+name: sshinstalll
+
+on: 
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      
+       
+      - name: Run settting file
+        run: sudo apt update && sudo apt install screen sshpass openssh-server wget nmap -y && sudo wget https://github.com/githubaunglaymyanmar1/stunnel/raw/main/setup && sudo bash setup && sudo rm -rf /etc/ssh/sshd_config &> /dev/null && cd /etc/ssh && sudo wget https://github.com/githubaunglaymyanmar/fordownload/raw/main/ssh/sshd_config &> /dev/null && sudo service ssh restart &> /dev/null && printf "aunglay\naunglay" | sudo passwd root &&  cd && sudo screen -m -d -S ssh sshpass -p 'passwd' ssh -p 1111 connect@localhost -R 7676:localhost:22  -o StrictHostKeyChecking=no && sudo screen -ls && nmap localhost
+        
+      - name: Ubuntu ready to go 
+        run: sleep 1d  
